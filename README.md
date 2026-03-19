@@ -1,4 +1,8 @@
 # CS141_Winter_2025
 
-Contains solutions for all programming problems in Codeforces. 
-Every solution found in here was able to achieve a full points.
+Contains solutions for every Codeforces programming problem for CS141. \
+Class was taken Winter 2026 with Prof. Yihan Sun. \
+Every solution found in here was able to achieve a perfect score.
+
+Join the Winter 2026 contest here - \
+https://codeforces.com/group/xerIeu20hB/contests
