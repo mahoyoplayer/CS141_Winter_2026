@@ -1,30 +1,36 @@
 import sys
-import os
 
 class FastIO:
+    import os
+    # Try to use local input file if exists
+    if os.path.exists(input_file := os.path.splitext(__file__)[0] + ".txt"):
+        sys.stdin = open(input_file, "r")
+    input = sys.stdin.buffer.readline
+
     @staticmethod
     def getInt() -> int:
-      return int(input())
+        return int(FastIO.input())
 
     @staticmethod
     def getInts():
-        return (list(map(int,input().split())))
+        return list(map(int, FastIO.input().split()))
+
+    @staticmethod
+    def getFloat() -> float:
+        return float(FastIO.input())
+
+    @staticmethod
+    def getFloats() -> list[float]:
+        return list(map(float, FastIO.input().split()))
 
     @staticmethod
     def getStr() -> str:
-        return input().decode().strip()
+        return FastIO.input().decode().strip()
 
     @staticmethod
     def getStrs() -> list[str]:
-      return input().decode().split()
+        return FastIO.input().decode().split()
 
-#region
-base = os.path.splitext(__file__)[0]
-input_file = base + ".txt"
-if os.path.exists(input_file):
-    sys.stdin = open(input_file, "r")
-input = sys.stdin.buffer.readline
-#endregion
 
 from heapq import heappop, heappush
 
@@ -61,5 +67,5 @@ for i in range(n):
     # Must subtract cost to reach and return from city
     profit = sell[i] - distance[i] * 2
     bestProfit = max(bestProfit, profit)
-sys.stdout.write(str(bestProfit))
+print(bestProfit)
 

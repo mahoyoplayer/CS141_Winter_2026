@@ -1,30 +1,35 @@
 import sys
-import os
 
 class FastIO:
+    import os
+    # Try to use local input file if exists
+    if os.path.exists(input_file := os.path.splitext(__file__)[0] + ".txt"):
+        sys.stdin = open(input_file, "r")
+    input = sys.stdin.buffer.readline
+
     @staticmethod
     def getInt() -> int:
-      return int(input())
+        return int(FastIO.input())
 
     @staticmethod
     def getInts():
-        return (list(map(int,input().split())))
+        return list(map(int, FastIO.input().split()))
+
+    @staticmethod
+    def getFloat() -> float:
+        return float(FastIO.input())
+
+    @staticmethod
+    def getFloats() -> list[float]:
+        return list(map(float, FastIO.input().split()))
 
     @staticmethod
     def getStr() -> str:
-        return input().decode().strip()
+        return FastIO.input().decode().strip()
 
     @staticmethod
     def getStrs() -> list[str]:
-      return input().decode().split()
-
-#region
-base = os.path.splitext(__file__)[0]
-input_file = base + ".txt"
-if os.path.exists(input_file):
-    sys.stdin = open(input_file, "r")
-input = sys.stdin.buffer.readline
-#endregion
+        return FastIO.input().decode().split()
 
 # Simple Implementation of Kruskal Algorithm
 n, m = FastIO.getInts()

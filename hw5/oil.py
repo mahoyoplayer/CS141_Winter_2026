@@ -1,30 +1,35 @@
 import sys
-import os
 
 class FastIO:
+    import os
+    # Try to use local input file if exists
+    if os.path.exists(input_file := os.path.splitext(__file__)[0] + ".txt"):
+        sys.stdin = open(input_file, "r")
+    input = sys.stdin.buffer.readline
+
     @staticmethod
     def getInt() -> int:
-      return int(input())
+        return int(FastIO.input())
 
     @staticmethod
     def getInts():
-        return (list(map(int,input().split())))
+        return list(map(int, FastIO.input().split()))
+
+    @staticmethod
+    def getFloat() -> float:
+        return float(FastIO.input())
+
+    @staticmethod
+    def getFloats() -> list[float]:
+        return list(map(float, FastIO.input().split()))
 
     @staticmethod
     def getStr() -> str:
-        return input().decode().strip()
+        return FastIO.input().decode().strip()
 
     @staticmethod
     def getStrs() -> list[str]:
-      return input().decode().split()
-
-#region
-base = os.path.splitext(__file__)[0]
-input_file = base + ".txt"
-if os.path.exists(input_file):
-    sys.stdin = open(input_file, "r")
-input = sys.stdin.buffer.readline
-#endregion
+        return FastIO.input().decode().split()
 
 n, m = FastIO.getInts()
  
@@ -60,22 +65,14 @@ def union(u_p, v_p):
         rank[v_p] += 1
         
 
-worst = 0
 used = 0
 for u, v, cost in edges:
     u_p, v_p = findParent(u), findParent(v)
-    if u_p == v_p:continue
-    """
-    for i in range(n):
-        if i == loc1: 
-            continue
-        if labels[i] == labels[loc1]:
-            labels[i] = labels[loc2]
-    labels[loc1] = labels[loc2]
-    """
+    if u_p == v_p: continue
     union(u_p, v_p)
-    worst = cost
     used += 1
-    if used == n - 1: break
+    if used == n - 1:
+        print(cost)
+        sys.exit()
  
-sys.stdout.write(f"{worst}")
+raise RuntimeError("Should never reach this point")
